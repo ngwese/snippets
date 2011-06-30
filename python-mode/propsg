@@ -1,12 +1,14 @@
-#contributor : Julio Carlos Menendez <godinblack@gmail.com>
-#name : _get_foo ... _set_foo ... foo=property(...)
+# contributor : Julio Carlos Menendez <godinblack@gmail.com>
+# contributor : Greg Wuller <g19883@gmail.com>
+# expand-env : ((yas/indent-line 'fixed) (yas/also-indent-first-line 't))
+# name : _getFoo ... _setFoo ... foo=property(...)
 # --
-def _set_${1:foo}(self, value):
-    self._$1 = value
+def _set${1:Foo}(self, value):
+    self._${1:$(concat (downcase (substring text 0 1)) (substring text 1))} = value
 
-def _get_$1(self):
-    return self._$1
+def _get$1(self):
+    return self._${1:$(concat (downcase (substring text 0 1)) (substring text 1))}
 
-$1 = property(_get_$1, _set_$1)
+${1:$(concat (downcase (substring text 0 1)) (substring text 1))} = property(_get$1, _set$1)
 
 $0
